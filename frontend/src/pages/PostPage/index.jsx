@@ -8,4 +8,4 @@ const PostPage=()=>{
   </>)
 }
 
-export default PostPage;c
+export default PostPage;
