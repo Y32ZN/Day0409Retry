@@ -26,6 +26,38 @@ const NavItem = styled.button`
   }
 `;
 
+const CategorySection = styled.div`
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+`;
+
+const CategoryTitle = styled.h2`
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #333;
+`;
+
+const SubCategoryList = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-left: 1rem;
+`;
+
+const SubCategoryItem = styled.button`
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: ${props => props.active ? '#000' : '#666'};
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  
+  &:hover {
+    background-color: #f5f5f5;
+    color: #000;
+  }
+`;
+
 const PlayerControls = styled.div`
   position: fixed;
   bottom: 0;
@@ -57,6 +89,14 @@ const AlbumCard = styled.div`
 
 const MusicPlayer = () => {
   const [activeTab, setActiveTab] = useState('국내음반');
+  const [activeSubCategory, setActiveSubCategory] = useState('발라드');
+
+  const categories = {
+    '국내음반': ['발라드', '알앤비'],
+    '해외음반': ['발라드', '알앤비'],
+    'Jazz': ['발라드', '알앤비'],
+    'MD': ['발라드', '알앤비']
+  };
 
   return (
     <Container>
@@ -80,18 +120,27 @@ const MusicPlayer = () => {
           Jazz
         </NavItem>
         <NavItem 
-          active={activeTab === 'DVD/Blu-Ray'} 
-          onClick={() => setActiveTab('DVD/Blu-Ray')}
-        >
-          DVD/Blu-Ray
-        </NavItem>
-        <NavItem 
           active={activeTab === 'MD'} 
           onClick={() => setActiveTab('MD')}
         >
           MD
         </NavItem>
       </Navigation>
+
+      <CategorySection>
+        <CategoryTitle>{activeTab}</CategoryTitle>
+        <SubCategoryList>
+          {categories[activeTab]?.map(subCategory => (
+            <SubCategoryItem
+              key={subCategory}
+              active={activeSubCategory === subCategory}
+              onClick={() => setActiveSubCategory(subCategory)}
+            >
+              {subCategory}
+            </SubCategoryItem>
+          ))}
+        </SubCategoryList>
+      </CategorySection>
 
       <AlbumContent>
         <AlbumCard>
