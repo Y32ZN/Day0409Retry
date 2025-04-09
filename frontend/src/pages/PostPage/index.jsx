@@ -4,6 +4,7 @@ const PostPage=()=>{
     <div>
       <p>포스트 페이지</p>
       <h1>Test</h1>
+      <h1>TEst</h1>
     </div>
   </>)
 }
